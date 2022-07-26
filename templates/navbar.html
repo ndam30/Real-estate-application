@@ -1,0 +1,155 @@
+
+{#<!-- Navbar -->#}
+{#  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">#}
+{#    <div class="container">#}
+{#      <a class="navbar-brand" href="index.html">#}
+{#        <img src="assets/img/logo.png" class="logo" alt="">#}
+{#      </a>#}
+{#      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">#}
+{#        <span class="navbar-toggler-icon"></span>#}
+{#      </button>#}
+{#      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">#}
+{#        <ul class="navbar-nav">#}
+{#          <li class="nav-item active mr-3">#}
+{#            <a class="nav-link" href="index.html">Home</a>#}
+{#          </li>#}
+{#          <li class="nav-item mr-3">#}
+{#            <a class="nav-link" href="{% url 'about' %}">About</a>#}
+{#          </li>#}
+{#          <li class="nav-item mr-3">#}
+{#            <a class="nav-link" href="listings.html">Featured Listings</a>#}
+{#          </li>#}
+{#        </ul>#}
+{##}
+{#        <ul class="navbar-nav ml-auto">#}
+{#          <li class="nav-item mr-3">#}
+{#            <a class="nav-link" href="register.html">#}
+{#              <i class="fas fa-user-plus"></i> Register</a>#}
+{#          </li>#}
+{#          <li class="nav-item mr-3">#}
+{#            <a class="nav-link" href="login.html">#}
+{#              <i class="fas fa-sign-in-alt"></i>#}
+{##}
+{#              Login</a>#}
+{#          </li>#}
+{#        </ul>#}
+{#      </div>#}
+{#    </div>#}
+{#  </nav>#}
+ <section id="top-bar" class="p-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <i class="fas fa-phone"></i> (617)-555-5555
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-envelope-open"></i> contact@btrealestate.co
+        </div>
+        <div class="col-md-4">
+          <div class="social text-right">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/img/logo.png" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li
+                  {% if '/' == request.path %}
+                  class="nav-item active mr-3"
+                  {% else %}
+                  class="nav-item mr-3">
+                   {% endif %}>
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+        <li
+                  {% if '/about' == request.path %}
+                  class="nav-item active mr-3"
+                  {% else %}
+                  class="nav-item mr-3">
+                   {% endif %}>
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+          </li>
+          <li
+                  {% if '/lists/' == request.path %}
+                  class="nav-item active mr-3"
+                  {% else %}
+                  class="nav-item mr-3">
+                   {% endif %}>
+            <a class="nav-link" href="{% url 'listing' %}">Featured Listings</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+{#                <li class="nav-item mr-3">#}
+{#            <a class="nav-link" href="">#}
+{#              <i class="fas fa-user-plus"></i> Hi {{ user.first_name }}</a>#}
+{#          </li>#}
+{#                <li> welcome {{ user.username }}</li>#}
+             <li
+                     {% if 'dashboard/' == request.path %}
+                  class="nav-item active mr-3"
+                  {% else %}
+                  class="nav-item mr-3">
+                   {% endif %}>
+
+            <a class="nav-link" href="{% url 'dashboard' %}">
+              <i class="fas fa-user-plus"></i>Welcome {{ user.username }} (dashboard)</a>
+          </li>
+
+             <li class="nav-item mr-3">
+            <a class="nav-link" href="{% url 'logout' %}">
+              <i class="fas fa-user-plus"></i> logout</a>
+          </li>
+            {% else %}
+          <li
+                  {% if '/register/' == request.path %}
+                  class="nav-item active mr-3"
+                  {% else %}
+                  class="nav-item mr-3">
+                   {% endif %}>
+
+            <a class="nav-link" href="{% url 'register' %}">
+              <i class="fas fa-user-plus"></i> Register</a>
+          </li>
+          <li {% if '/accounts/login/' == request.path %}
+                  class="nav-item active mr-3"
+                  {% else %}
+                  class="nav-item mr-3">
+                   {% endif %}>
+            <a class="nav-link" href="{% url 'login' %}">
+              <i class="fas fa-sign-in-alt"></i>
+
+              Login</a>
+          </li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
